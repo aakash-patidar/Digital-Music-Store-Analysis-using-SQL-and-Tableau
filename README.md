@@ -198,6 +198,7 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
    Now that we know the common column betweeen the customer and invoice tables in the Music_store database, we can easily join these two tables using a common key.  
    ```sql
    -- Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
+
    SELECT
      customer.customer_id,
      customer.first_name,
@@ -216,7 +217,101 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/40f19090-c60f-4c99-bf04-619324a201c7">  
   
-6. Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A
+6. **Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A**  
+   The email, first name, and last name columns can be retrieved from the customer table in the Music_store database, and the Genre Rock music information can be obtained from the genre table. However, these tables are not directly related as they do not share a common column. So, to achieve our desired result, we can either use a Schema diagram to see the relationships between the tables or write a query to understand the relationships among all tables in the Music_store database.
+   
+   Firstly, we will understand the relationships between the tables using a Schema diagram.
+   
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/435019aa-edff-4ac9-8ad1-8c4990302cec">
+   
+   We know that we want to join our customer table to the genre table. From the schema diagram, we can see that the customer table can be connected to the invoice table using the common column customer_id. The invoice table can then be connected to the invoice_line table using the common column invoice_id. The invoice_line table can be connected to the track table using the common column track_id. Finally, the track table can be connected to the genre table using the common column genre_id. Using these relationships, we can write a query that connects all the tables.
+
+   However, sometimes we don't have access to a schema diagram. In that case, it is better to write a query to understand the relationships between the tables. Let's write a query to understand the relationships between the tables in a Music_store database.  
+   ```sql
+   -- -- Understanding the relationships between the tables in a Music_store database
+
+   SELECT
+     COLUMN_NAME,
+     STRING_AGG(TABLE_NAME, ', ') AS TABLE_NAMES
+   FROM
+     `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+   WHERE
+     TABLE_NAME IN ('album', 'artist', 'customer', 'employee', 'genre', 'invoice', 'invoice_line', 'media_type', 'playlist', 'playlist_track', 'track')
+   GROUP BY
+     COLUMN_NAME
+   HAVING
+     COUNT(DISTINCT TABLE_NAME) >= 2; 
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/2d6f7eb4-3f2c-404d-b678-81acb1a0df6e">  
+
+   let's make this query to identify the relationships between the tables in a Music_store database more clear by adding table count
+   ```sql
+   -- Understanding the relationships between the tables in a Music_store database
+   -- Instead of ARRAY_TO_STRING(ARRAY_AGG(TABLE_NAME), ', ') AS TABLE_NAMES, we can aslo use STRING_AGG(TABLE_NAME, ', ') AS TABLE_NAMES
+
+   WITH column_table AS (
+     SELECT
+       COLUMN_NAME,
+       TABLE_NAME
+     FROM
+       `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+     WHERE
+       TABLE_NAME IN ('album', 'artist', 'customer', 'employee', 'genre', 'invoice', 'invoice_line', 'media_type', 'playlist', 'playlist_track', 'track')
+   )
+   SELECT
+     COLUMN_NAME,
+     ARRAY_TO_STRING(ARRAY_AGG(TABLE_NAME), ', ') AS TABLE_NAMES,
+     COUNT(DISTINCT TABLE_NAME) AS TABLE_COUNT
+   FROM
+     column_table
+   GROUP BY
+     COLUMN_NAME
+   HAVING
+     TABLE_COUNT >= 2
+   ORDER BY
+     TABLE_COUNT DESC;
+   ```  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/49166512-c143-415b-a996-756ef9b61689">
+   
+   Finally, we will write the query to obtain the desired answer for our question
+   ```sql
+   -- Write a query to return the email, first name, last name, & Genre of all Rock Music listeners.
+   -- Return your list ordered alphabetically by email starting with A
+
+   SELECT
+     DISTINCT email,
+     first_name,
+     last_name
+   FROM
+     `alien-program-424600-g6.Music_store.customer` AS customer
+   JOIN
+     `alien-program-424600-g6.Music_store.invoice` AS invoice
+     ON customer.customer_id = invoice.customer_id
+   JOIN
+     `alien-program-424600-g6.Music_store.invoice_line` AS invoice_line
+     ON invoice.invoice_id = invoice_line.invoice_id
+   WHERE
+     track_id IN(
+       SELECT
+         track_id
+       FROM
+         `alien-program-424600-g6.Music_store.track` AS track
+       JOIN
+         `alien-program-424600-g6.Music_store.genre` AS genre
+         ON track.genre_id = genre.genre_id
+       WHERE
+         genre.name LIKE 'Rock'    -- Instead of genre.name LIKE 'Rock', you can also use genre.name = 'Rock'
+     )
+   ORDER BY
+     email;
+   ```  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/803a7613-c90e-4a2d-b157-3d9fafc66a31">  
+
+
+  
+   
+
+   
    
    
    
