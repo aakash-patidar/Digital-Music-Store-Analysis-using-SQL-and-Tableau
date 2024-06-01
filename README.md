@@ -42,7 +42,7 @@ The key stakeholders for this project include:
 3. What are top 3 values of total invoice
 4. Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
 5. Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
-6. Write query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A
+6. Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A
 7. Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands
 8. Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first
 9. Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent
@@ -98,6 +98,127 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
 
 ### Analyze:  
 1. **Who is the senior most employee based on job title**
+   ```sql
+   -- Who is the senior most employee based on job title
+
+   SELECT
+     employee_id,
+     last_name,
+     first_name,
+     title,
+     levels 
+   FROM
+     `alien-program-424600-g6.Music_store.employee`
+   ORDER BY
+     levels DESC
+   LIMIT 1
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/c1131091-6b37-449a-be87-8c9da217c4e5">  
+
+2. **Which countries have the most Invoices**
+   ```sql
+   -- Which countries have the most Invoices
+
+   SELECT
+     billing_country,
+     COUNT(*) AS count_countries
+   FROM
+     `alien-program-424600-g6.Music_store.invoice`
+   GROUP BY
+     billing_country
+   ORDER BY
+     count_countries DESC
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/f573ed30-8067-4309-b780-b7863359e6cb">  
+
+3. **What are top 3 values of total invoice**
+   ```sql
+   -- What are top 3 values of total invoice
+
+   SELECT
+     total
+   FROM
+     `alien-program-424600-g6.Music_store.invoice`
+   ORDER BY
+     total DESC
+   LIMIT 3
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/4c3021b5-78e4-4879-b90d-fabecf1a29c8">  
+
+4. **Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals**
+   ```sql
+   -- Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
+
+   SELECT
+     billing_city,
+     SUM(total) AS invoice_total
+   FROM
+     `alien-program-424600-g6.Music_store.invoice`
+   GROUP BY
+     billing_city
+   ORDER BY
+     invoice_total DESC
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/5e7e3839-3c82-4fbb-854b-1ba3189f7ea3">  
+
+5. **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**    
+   We want to identify the customer who has spent the most money. To do this, we need to look at the customer table. However, the customer table does not have a column named 'total'. Therefore, we need to join the customer table with the invoice table to obtain the information we need.  
+   First, we will find the common columns between the customer and invoice tables in the Music_store dataset to determine how to join these two tables. This will help us identify the common key for the join operation. To achieve this, we will use INFORMATION_SCHEMA.COLUMNS to identify the common column between these two tables.  
+   
+   ```sql
+   -- Checking to see which column names are common between the customer and invoice tables
+   
+   WITH customer_columns AS (
+   SELECT
+     column_name
+   FROM
+     `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+   WHERE
+     table_name = 'customer'
+   ),
+   invoice_columns AS (
+   SELECT
+     column_name
+   FROM
+     `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+   WHERE
+     table_name = 'invoice'
+   )
+   SELECT
+     c.column_name
+   FROM
+     customer_columns AS c
+   JOIN
+     invoice_columns AS i
+   ON
+     c.column_name = i.column_name;
+   ```  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/a5ce8466-0886-4426-b38d-ec34549718ef">  
+
+   Now that we know the common column betweeen the customer and invoice tables in the Music_store database, we can easily join these two tables using a common key.  
+   ```sql
+   -- Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
+   SELECT
+     customer.customer_id,
+     customer.first_name,
+     customer.last_name,
+     SUM(invoice.total) AS money_spent
+   FROM
+     `alien-program-424600-g6.Music_store.customer` AS customer
+   JOIN
+     `alien-program-424600-g6.Music_store.invoice` AS invoice
+   ON customer.customer_id = invoice.customer_id
+   GROUP BY
+     1,2,3
+   ORDER BY
+     money_spent DESC
+   LIMIT 1
+   ```  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/40f19090-c60f-4c99-bf04-619324a201c7">  
+  
+6. Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A
+   
+   
    
 
 
@@ -112,11 +233,11 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
 
 
 
-3. Which countries have the most Invoices
-4. What are top 3 values of total invoice
-5. Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
-6. Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
-7. Write query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A
+
+
+
+
+
 8. Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands
 9. Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first
 10. Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent
