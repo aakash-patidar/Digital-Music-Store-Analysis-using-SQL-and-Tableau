@@ -161,7 +161,8 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/5e7e3839-3c82-4fbb-854b-1ba3189f7ea3">  
 
-5. **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**    
+5. **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**  
+
    We want to identify the customer who has spent the most money. To do this, we need to look at the customer table. However, the customer table does not have a column named 'total'. Therefore, we need to join the customer table with the invoice table to obtain the information we need.  
    First, we will find the common columns between the customer and invoice tables in the Music_store dataset to determine how to join these two tables. This will help us identify the common key for the join operation. To achieve this, we will use INFORMATION_SCHEMA.COLUMNS to identify the common column between these two tables.  
    
@@ -218,6 +219,7 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/40f19090-c60f-4c99-bf04-619324a201c7">  
   
 6. **Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A**  
+
    The email, first name, and last name columns can be retrieved from the customer table in the Music_store database, and the Genre Rock music information can be obtained from the genre table. However, these tables are not directly related as they do not share a common column. So, to achieve our desired result, we can either use a Schema diagram to see the relationships between the tables or write a query to understand the relationships among all tables in the Music_store database.
    
    Firstly, we will understand the relationships between the tables using a Schema diagram.
@@ -306,38 +308,219 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
      email;
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/803a7613-c90e-4a2d-b157-3d9fafc66a31">  
-
-
-  
    
+7. **Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands**  
 
+   In this case, we want to join our artist table to the genre table, but there are no direct relationships between these two tables. So, we will look at our schema diagram to understand the relationships of the tables and write the query to get the answers we want.
+
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/d7dd8aab-d4d4-4a2c-b557-6462012baf66">  
+
+   By looking at the schema diagram, we understand that the artist table is connected to the album table, the album table is connected to the track table, and the track table is connected to the genre table. To join the artist table to the genre table, we need to connect all these tables. Now that we understand the relationships between the tables, let's write a query to get the desired results.
+
+   ```sql
+   -- Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands
+
+   SELECT
+     artist.artist_id,
+     artist.name,
+     COUNT(artist.artist_id) AS number_of_songs
+   FROM
+     `alien-program-424600-g6.Music_store.track` AS track
+   JOIN
+     `alien-program-424600-g6.Music_store.album` AS album
+     ON album.album_id = track.album_id
+   JOIN
+     `alien-program-424600-g6.Music_store.artist` AS artist
+     ON artist.artist_id = album.artist_id
+   JOIN
+     `alien-program-424600-g6.Music_store.genre` AS genre
+     ON genre.genre_id = track.genre_id
+   WHERE
+     genre.name LIKE 'Rock'    -- Instead of genre.name LIKE 'Rock', you can also use genre.name = 'Rock'
+   GROUP BY
+     artist.artist_id,
+     artist.name
+   ORDER BY
+     number_of_songs DESC
+   LIMIT 10;
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/feb4fddb-0fe3-497c-8640-5d4b415f17a4">
+
+8. **Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first**  
+
+   ```sql
+   -- Return all the track names that have a song length longer than the average song length.
+   -- Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first
+   SELECT
+     name,
+     milliseconds AS song_length
+   FROM
+     `alien-program-424600-g6.Music_store.track`
+    WHERE
+     milliseconds > (
+       SELECT
+         AVG(milliseconds)
+       FROM
+       `alien-program-424600-g6.Music_store.track`
+     )
+   ORDER BY
+     milliseconds DESC;
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/d5fe2840-8fe8-4c49-9395-5c585d3d32a0">
    
-   
-   
-   
+9. **Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent**  
+
+   In this case, to find the desired answers, we need data from three tables: artist, customer, and invoice_line. We can't use the total column from the invoice table to calculate the total spent because we want to determine the money spent by each customer on each artist, not the total spent per invoice, which represents the total spent at a product level. For instance, if a customer bought a song from a particular artist, we will use the quantity (1) and the price of that song, multiplying them to calculate the total. However, if the customer bought an album that contains four songs, we need to multiply the unit price by the quantity (4) to get the total.  
+   First, we will determine which artist has earned the most according to the invoice_line table. Then, using this artist, we will find which customer spent the most on this particular artist. To perform this query, we need to utilize data from the invoice, invoice_line, track, customer, album, and artist tables. Since the total spent in the invoice table might not correspond to a single product, we need to use the invoice_line table to find out how many of each product was purchased and then multiply this by the price for each artist.  
+
+   ```sql
+   -- Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent
+
+   WITH best_selling_artist AS (
+     SELECT
+       artist.artist_id AS artist_id,
+       artist.name AS artist_name,
+       SUM(invoice_line.unit_price*invoice_line.quantity) AS total_sales
+     FROM
+       `alien-program-424600-g6.Music_store.invoice_line` AS invoice_line
+     JOIN
+       `alien-program-424600-g6.Music_store.track` AS track
+       ON track.track_id = invoice_line.track_id
+     JOIN 
+      `alien-program-424600-g6.Music_store.album` AS album
+       ON album.album_id = track.album_id
+     JOIN
+       `alien-program-424600-g6.Music_store.artist` AS artist
+       ON artist.artist_id = album.artist_id
+     GROUP BY
+       1,2
+     ORDER BY
+       3 DESC
+     LIMIT 1
+   )
+   SELECT
+     c.customer_id,
+     c.first_name,
+     c.last_name,
+     bsa.artist_name,
+     SUM(il.unit_price*il.quantity) AS amount_spent
+   FROM
+     `alien-program-424600-g6.Music_store.invoice` AS i
+   JOIN
+     `alien-program-424600-g6.Music_store.customer` AS c
+       ON c.customer_id = i.customer_id
+   JOIN
+     `alien-program-424600-g6.Music_store.invoice_line` AS il
+     ON il.invoice_id = i.invoice_id
+   JOIN
+     `alien-program-424600-g6.Music_store.track` AS t
+     ON t.track_id = il.track_id
+   JOIN
+     `alien-program-424600-g6.Music_store.album` AS alb
+     ON alb.album_id = t.album_id
+   JOIN
+     best_selling_artist AS bsa
+     ON bsa.artist_id = alb.artist_id
+   GROUP BY
+     1,2,3,4
+   ORDER BY
+     5 DESC;
+   ```
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/1496b500-0de4-460e-a2f9-1df81af46298">  
+
+10. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**  
+
+    As we can observe from the schema diagram, our genre-related data is stored in the genre table, while country-related data is located in the invoice table under a column called "billing_country". However, these two tables are not directly related. Therefore, we need to write a query to connect these tables, including invoice and genre. Hence, to perform this query, we need to utilize data from the invoice, invoice_line, track, customer, and genre tables to obtain the desired answers.  
+    Also, in this case, they asked for the highest purchases, not the total purchases. Therefore, to determine the highest purchase, we will use the count instead of multiplying the quantity by the unit price, which represents the total amount spent.
+    ```sql
+    -- We want to find out the most popular music Genre for each country.
+    -- We determine the most popular genre as the genre with the highest amount of purchases.
+    -- Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres
+
+    WITH popular_genre AS (
+      SELECT
+        COUNT(invoice_line.quantity) AS purchases,   -- we can take count of any column in the invoice_line table
+        customer.country,
+        genre.name,
+        genre.genre_id,
+        ROW_NUMBER() OVER(PARTITION BY customer.country ORDER BY COUNT(invoice_line.quantity) DESC) AS RowNo
+      FROM
+        `alien-program-424600-g6.Music_store.invoice_line` AS invoice_line
+      JOIN
+        `alien-program-424600-g6.Music_store.invoice` AS invoice
+        ON invoice.invoice_id = invoice_line.invoice_id
+      JOIN
+        `alien-program-424600-g6.Music_store.customer` AS customer
+        ON customer.customer_id = invoice.customer_id
+      JOIN
+        `alien-program-424600-g6.Music_store.track` AS track
+        ON track.track_id = invoice_line.track_id
+      JOIN
+        `alien-program-424600-g6.Music_store.genre` AS genre
+        ON genre.genre_id = track.genre_id
+      GROUP BY
+        2,3,4
+      ORDER BY
+        2 ASC,
+        1 DESC
+    )
+    SELECT
+      *
+    FROM
+      popular_genre
+    WHERE
+      RowNo <= 1
+    ```
+    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/eb476431-619c-4515-a2a5-90365dce1967">   
+
+11. **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
+    As we can see from the schema diagram, we need only two tables to solve this particular question: the customer and invoice tables. We can easily find customer information from the customer table, country information from the invoice table (in the column called "billing_country"), and total spending from the total column in the invoice table. Also, we know these two tables, customer and invoice, are directly linked to each other. Let's run a query to get the desired answer from the database.  
+    ```sql
+    -- Write a query that determines the customer that has spent the most on music for each country.
+    -- Write a query that returns the country along with the top customer and how much they spent.
+    -- For countries where the top amount spent is shared, provide all customers who spent this amount
+
+    WITH Customter_with_country AS (
+      SELECT 
+        customer.customer_id,
+        customer.first_name,
+        customer.last_name,
+        invoice.billing_country,
+        SUM(total) AS total_spending,
+        ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS RowNo 
+		  FROM 
+        `alien-program-424600-g6.Music_store.invoice` AS invoice
+      JOIN 
+        `alien-program-424600-g6.Music_store.customer` AS customer 
+        ON customer.customer_id = invoice.customer_id
+		  GROUP BY 
+        1,2,3,4
+		  ORDER BY 
+        4 ASC,
+        5 DESC
+    )
+    SELECT
+      *
+    FROM
+      Customter_with_country
+    WHERE
+      RowNo <= 1
+    ``` 
+    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
+
+### Share:
+The "Share" phase of the data analysis process involves communicating the results and insights derived from the analysis to stakeholders. This includes summarizing key findings, creating visualizations to present data trends, and providing actionable recommendations for decision-making. Effective communication ensures that stakeholders understand the implications of the data analysis and can use it to inform strategic decisions.  
 
 
 
 
 
+    
 
 
 
 
-
-
-
-
-
-
-
-
-
-8. Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands
-9. Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first
-10. Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent
-11. We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres
-12. Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount
+    
 
 
 
