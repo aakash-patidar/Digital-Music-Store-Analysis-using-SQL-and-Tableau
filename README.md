@@ -230,7 +230,7 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
 
    However, sometimes we don't have access to a schema diagram. In that case, it is better to write a query to understand the relationships between the tables. Let's write a query to understand the relationships between the tables in a Music_store database.  
    ```sql
-   -- -- Understanding the relationships between the tables in a Music_store database
+   -- Understanding the relationships between the tables in a Music_store database
 
    SELECT
      COLUMN_NAME,
