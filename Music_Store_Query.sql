@@ -1,4 +1,4 @@
--- 1. Who is the senior most employee based on job title
+/* 1. Who is the senior most employee based on job title */
 
 SELECT
   employee_id,
@@ -13,7 +13,7 @@ ORDER BY
 LIMIT 1
   
 
--- 2. Which countries have the most Invoices
+/* 2. Which countries have the most Invoices */
 
 SELECT
   billing_country,
@@ -26,7 +26,7 @@ ORDER BY
   count_countries DESC
   
 
--- 3. What are top 3 values of total invoice
+/* 3. What are top 3 values of total invoice */
 
 SELECT
   total
@@ -37,7 +37,8 @@ ORDER BY
 LIMIT 3
 
 
--- 4. Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
+/* 4. Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. 
+Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals */
 
 SELECT
   billing_city,
