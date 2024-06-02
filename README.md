@@ -121,15 +121,15 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
 
    SELECT
      billing_country,
-     COUNT(*) AS count_countries
+     COUNT(*) AS count_invoice
    FROM
      `alien-program-424600-g6.Music_store.invoice`
    GROUP BY
      billing_country
    ORDER BY
-     count_countries DESC
+     count_invoice DESC
    ```
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/f573ed30-8067-4309-b780-b7863359e6cb">  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/45a85f8b-5fd0-46ff-ba67-736030dffaf2">  
 
 3. **What are top 3 values of total invoice**
    ```sql
