@@ -18,13 +18,13 @@ LIMIT 1
 
 SELECT
   billing_country,
-  COUNT(*) AS count_countries
+  COUNT(*) AS count_invoice
 FROM
   `alien-program-424600-g6.Music_store.invoice`
 GROUP BY
   billing_country
 ORDER BY
-  count_countries DESC
+  count_invoice DESC
 
   
 
