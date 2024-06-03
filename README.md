@@ -511,39 +511,33 @@ Now that the datasets are imported into BigQuery, let's analyze the data to answ
 ### Share:
 The "Share" phase of the data analysis process involves communicating the results and insights derived from the analysis to stakeholders. This includes summarizing key findings, creating visualizations to present data trends, and providing actionable recommendations for decision-making. Effective communication ensures that stakeholders understand the implications of the data analysis and can use it to inform strategic decisions.  
 
-1. **Who is the senior most employee based on job title**  
+- **Who is the senior most employee based on job title**    
    
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/f4daa491-52c3-4c0a-9839-f498596ed37d">   
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/f4daa491-52c3-4c0a-9839-f498596ed37d">   
 
-2. **Which countries have the most Invoices**    
+- **Which countries have the most Invoices**      
    
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/edc8f314-afea-421b-90a2-10d846710420">   
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/edc8f314-afea-421b-90a2-10d846710420">   
  
-3. **Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals**    
+- **Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals**      
 
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/c40ff395-952c-4dbb-b8eb-dddf6e376329">   
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/c40ff395-952c-4dbb-b8eb-dddf6e376329">   
 
-4. **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**
+- **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**  
     
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/b935a9cb-51cf-438e-9334-0ea725fe87a4">   
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/b935a9cb-51cf-438e-9334-0ea725fe87a4">     
  
-8. **Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
- 
-9. **Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
- 
-10. **Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
- 
-11. **Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
+- **Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands**
   
-12. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/f10d6010-462f-4422-84dd-683686df9ca3">       
+  
+- **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**  
+
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bca762df-ec54-4b7a-843f-f4bd285a0314">     
  
-13. **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/bbc26bb9-fd8d-4897-8392-e9b6398279cf">   
+- **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
+  
+  <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/b3cfbf01-05f1-4b40-aa48-81a20d917fbe">   
  
 
 
