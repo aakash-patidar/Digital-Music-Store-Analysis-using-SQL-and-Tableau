@@ -543,7 +543,7 @@ The "Share" phase of the data analysis process involves communicating the result
 The "Act" phase of the data analysis process is a crucial step where insights derived from data analysis are translated into actionable strategies and decisions. This phase focuses on implementing the findings to achieve business objectives, improve processes, and drive positive outcomes.  
 
 **Key takeaways:**  
-- Patterns in saled data: Identify key patterns in sales data, such as the most popular genres, peak purchasing times, and customer demographics.
+- Patterns in sales data: Identify key patterns in sales data, such as the most popular genres, peak purchasing times, and customer demographics.
 - Customer Preferences: Determine patterns in customer preferences, such as favored genres, frequently purchased artists or albums, and the types of playlists created.
 - Identify the most popular albums, including the number of times they are purchased, and the common genres,cand songs within these albums.
 
