@@ -97,6 +97,7 @@ A platform called "Big Query" was used for the analysis. To import the cleaned C
 Now that the datasets are imported into BigQuery, let's analyze the data to answer our questions, gain insights, and draw conclusions.  
 
 ### Analyze:  
+The "Analyze" phase in the data analysis process involves examining the cleaned and prepared data to uncover meaningful insights and trends.  
 1. **Who is the senior most employee based on job title**
    ```sql
    -- Who is the senior most employee based on job title
