@@ -169,30 +169,16 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```sql
    -- Checking to see which column names are common between the customer and invoice tables
    
-   WITH customer_columns AS (
    SELECT
-     column_name
+   	column_name
    FROM
-     `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+   	`alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
    WHERE
-     table_name = 'customer'
-   ),
-   invoice_columns AS (
-   SELECT
-     column_name
-   FROM
-     `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
-   WHERE
-     table_name = 'invoice'
-   )
-   SELECT
-     c.column_name
-   FROM
-     customer_columns AS c
-   JOIN
-     invoice_columns AS i
-   ON
-     c.column_name = i.column_name;
+   	table_name IN ('customer', 'invoice')
+   GROUP BY
+   	column_name
+   HAVING
+   	COUNT(DISTINCT table_name) = 2;
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/a5ce8466-0886-4426-b38d-ec34549718ef">  
 
