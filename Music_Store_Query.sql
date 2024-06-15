@@ -2,8 +2,7 @@
 
 SELECT
   employee_id,
-  last_name,
-  first_name,
+  CONCAT(first_name, ' ', last_name) AS name,
   title,
   levels 
 FROM
