@@ -15,7 +15,7 @@ The key steps followed in the analysis:
 - Act
 
 ## About the company  
-Beatbox is a digital music store company that sells digital audio files of music recordings over the Internet. Collecting data on album, artist, customer, employee, genre and playlist has allowed Beatbox to provide customers gain ownership of a license to use the music files. Jason Furtado, Beatbox’s cofounder and Chief Creative Officer believes that an analysis of music playlist data would reveal more opportunities for growth.  
+Beatbox is a pioneering digital music store company that offers a vast collection of digital audio files from various albums and artists, providing customers with licensed ownership of their favorite music. By meticulously gathering data on albums, artists, customers, genres, and playlists, Beatbox aims to enhance user experience and discover new growth opportunities. Jason Furtado, the cofounder and Chief Creative Officer, is particularly interested in analyzing music playlist data to uncover emerging trends and tailor personalized recommendations for their diverse user base.  
 
 ## Tools Used  
 - Microsoft Excel: Data Cleaning
