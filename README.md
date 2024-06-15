@@ -103,8 +103,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 
    SELECT
      employee_id,
-     last_name,
-     first_name,
+     CONCAT(first_name, ' ', last_name) AS name,
      title,
      levels 
    FROM
@@ -113,7 +112,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
      levels DESC
    LIMIT 1
    ```
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/c1131091-6b37-449a-be87-8c9da217c4e5">  
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/6dc16005-f171-46db-9f30-c08e5bb50609">  
 
 2. **Which countries have the most Invoices**
    ```sql
