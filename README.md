@@ -74,10 +74,9 @@ track.csv
 The "process" step in data analysis involves cleaning, transforming, and integrating data to make sure it is accurate, consistent, and ready for analysis. This includes tasks like handling missing values, correcting errors, standardizing formats, and merging data from different sources. These steps are essential to ensure the quality and reliability of the data for meaningful analysis.  
 
 **Data cleaning: Microsoft Excel**  
-- Checked for Duplicates  
-- Checked for Blanks  
-- Sort the Data  
-  Arranged the dataset in ascending order based on the Ids.  
+- Checked for Duplicates: Used Excel's built-in Remove Duplicates tool   
+- Checked for Blanks: Used Filter option and Conditional Formatting to handle blank or missing values   
+- Sort the Data: Arranged the dataset in ascending order based on the Ids  
 
 So, the data cleaning process has done using Microsoft Excel.  
 **For further processes, including Data Transformation, Data Analysis, and Data Visualization, SQL and Tableau were used:**
