@@ -36,7 +36,7 @@ The key stakeholders for this project include:
 - Beatbox Management team: A management team, a group of high-level associates hired by a owner to take on essential responsibilities within the business
 - Beatbox Analytics team: A team of data analysts responsible for collecting, analyzing, and reporting data that helps guide Beatbox’s business strategy
 
-**To address Beatbox's business objectives and gain valuable insights, the following questions will guide the analysis**  
+**To address Beatbox's business objectives and gain valuable insights, the following questions will guide the analysis:**  
 1. Who is the senior most employee based on job title
 2. Which countries have the most Invoices
 3. What are top 3 values of total invoice
