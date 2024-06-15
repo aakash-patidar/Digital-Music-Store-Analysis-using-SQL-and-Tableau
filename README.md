@@ -164,7 +164,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 5. **Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money**  
 
    We want to identify the customer who has spent the most money. To do this, we need to look at the customer table. However, the customer table does not have a column named 'total'. Therefore, we need to join the customer table with the invoice table to obtain the information we need.  
-   First, we will find the common columns between the customer and invoice tables in the Music_store dataset to determine how to join these two tables. This will help us identify the common key for the join operation. To achieve this, we will use INFORMATION_SCHEMA.COLUMNS to identify the common column between these two tables.  
+   First, we will find the common column between the customer and invoice tables in the Music_store dataset to determine how to join these two tables. This will help us identify the common key for the join operation. To achieve this, we will use INFORMATION_SCHEMA.COLUMNS to identify the common column between these two tables.  
    
    ```sql
    -- Checking to see which column names are common between the customer and invoice tables
