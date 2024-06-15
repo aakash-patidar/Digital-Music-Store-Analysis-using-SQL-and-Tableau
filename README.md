@@ -28,7 +28,7 @@ Beatbox is a pioneering digital music store company that offers a vast collectio
 The "ask" phase of the data analysis process involves recognizing the current problem, understanding stakeholder expectations, defining the business task, and identifying how insights will benefit stakeholders.  
 
 **Business Task:**  
-Analyze music playlist data in order to gain insights that will help guide the company in understanding its business growth.
+Analyze music playlist data to gain insights into customer preferences, guiding the company in understanding and driving its business growth.  
 
 **Key Stakeholders**  
 The key stakeholders for this project include:
