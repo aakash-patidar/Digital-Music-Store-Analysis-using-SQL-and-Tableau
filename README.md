@@ -184,7 +184,8 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 
    Now that we know the common column betweeen the customer and invoice tables in the Music_store database, we can easily join these two tables using a common key.  
    ```sql
-   -- Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
+   -- Who is the best customer? The customer who has spent the most money will be declared the best customer.
+   -- Write a query that returns the person who has spent the most money
 
    SELECT
      customer.customer_id,
