@@ -1,6 +1,6 @@
 # Digital Music Store Analysis  
 <p align="center">
-  <img width="400" height="400" src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/a4bba529-6598-4873-b5e8-0a3e4a7b69d9">
+  <img width="300" height="300" src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/21113d3c-439c-4dee-8437-9b67f56aa9cd">
 </p>  
 
 ## Scenario
