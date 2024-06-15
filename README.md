@@ -75,7 +75,7 @@ The "process" step in data analysis involves cleaning, transforming, and integra
 
 **Data cleaning: Microsoft Excel**  
 - Checked for Duplicates: Used Excel's built-in Remove Duplicates tool   
-- Checked for Blanks: Used Filter option and Conditional Formatting to handle blank or missing values   
+- Checked for Blanks: Utilized the Filter option and Conditional Formatting to identify and handle blank or missing values   
 - Sort the Data: Arranged the dataset in ascending order based on the Ids  
 
 So, the data cleaning process has done using Microsoft Excel.  
