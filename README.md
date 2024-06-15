@@ -146,7 +146,8 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 
 4. **Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals**
    ```sql
-   -- Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money. Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
+   -- Which city has the best customers? We would like to throw a promotional Music Festival in the city we made the most money.
+   -- Write a query that returns one city that has the highest sum of invoice totals. Return both the city name & sum of all invoice totals
 
    SELECT
      billing_city,
