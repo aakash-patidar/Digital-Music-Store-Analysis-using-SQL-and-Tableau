@@ -57,30 +57,16 @@ ORDER BY
 /* 5. Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
 Checking to see which column names are common between the customer and invoice tables */
 
-WITH customer_columns AS (
 SELECT
   column_name
 FROM
   `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
 WHERE
-  table_name = 'customer'
-),
-invoice_columns AS (
-SELECT
+  table_name IN ('customer', 'invoice')
+GROUP BY
   column_name
-FROM
-  `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
-WHERE
-  table_name = 'invoice'
-)
-SELECT
-  c.column_name
-FROM
-  customer_columns AS c
-JOIN
-  invoice_columns AS i
-ON
-  c.column_name = i.column_name;
+HAVING
+  COUNT(DISTINCT table_name) = 2;
 
 /* Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money */
 
