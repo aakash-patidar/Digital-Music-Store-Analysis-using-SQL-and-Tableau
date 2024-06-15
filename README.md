@@ -53,7 +53,7 @@ The key stakeholders for this project include:
 The "prepare" phase of the data analysis process involves collecting and preparing the necessary data for analysis. Key steps include identifying data sources such as databases, spreadsheets, or external sources, and then extracting the relevant information.    
 
 Jason Furtado, Beatbox’s cofounder and Chief Creative Office encourages to use music playlist data which includes information about artist, album, playlist, track, media type, genre, invoice line, invoice, customer and employee.  
-The datasets were in a zip file containing 11 CSV files, representing 18 distinct datasets.  
+The datasets were in a zip file containing 11 CSV files, representing 11 distinct data tables.  
 
 **The following datasets were used for the analysis:**  
 ```
