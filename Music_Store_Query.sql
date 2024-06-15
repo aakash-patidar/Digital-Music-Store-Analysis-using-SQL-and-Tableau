@@ -54,8 +54,9 @@ ORDER BY
 
 
   
-/* 5. Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money
-Checking to see which column names are common between the customer and invoice tables */
+/* 5. Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money */
+
+-- Checking to see which column names are common between the customer and invoice tables
 
 SELECT
   column_name
