@@ -528,7 +528,7 @@ The "Act" phase of the data analysis process is a crucial step where insights de
 **Key takeaways:**  
 - Patterns in sales data: Identify key patterns in sales data, such as the most popular genres, peak purchasing times, and customer demographics.
 - Customer Preferences: Determine patterns in customer preferences, such as favored genres, frequently purchased artists or albums, and the types of playlists created.
-- Identify the most popular albums, including the number of times they are purchased, and the common genres,cand songs within these albums.
+- Identify the most popular albums, including the number of times they are purchased, and the common genres, and songs within these albums.
 
 #### Recommendations to improve business growth   
 - Enhanced Recommendations: Implement algorithms to generate personalized music recommendations based on playlist data.
