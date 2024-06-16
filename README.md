@@ -251,7 +251,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ORDER BY
      TABLE_COUNT DESC;
    ```  
-   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/49166512-c143-415b-a996-756ef9b61689">
+   <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/ff5c5c76-c25b-4b25-93cc-c0c5e1201c3c">
    
    Finally, we will write the query to obtain the desired answer for our question
    ```sql
