@@ -203,7 +203,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/40f19090-c60f-4c99-bf04-619324a201c7">  
   
-7. **Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A**  
+6. **Write a query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A**  
 
    The email, first name, and last name columns can be retrieved from the customer table in the Music_store database, and the Genre Rock music information can be obtained from the genre table. However, these tables are not directly related as they do not share a common column. So, to achieve our desired result, we can either use a Schema diagram to see the relationships between the tables or write a query to understand the relationships among all tables in the Music_store database.
    
@@ -287,7 +287,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
          `alien-program-424600-g6.Music_store.genre` AS genre
          ON track.genre_id = genre.genre_id
        WHERE
-         genre.name LIKE 'Rock'    -- Instead of genre.name LIKE 'Rock', you can also use genre.name = 'Rock'
+         genre.name = 'Rock'    
      )
    ORDER BY
      email;
