@@ -337,28 +337,28 @@ WHERE
 WITH RECURSIVE
 	sales_per_country AS (
     SELECT 
-      COUNT(*) AS purchases_per_genre, 
+    	COUNT(*) AS purchases_per_genre, 
       customer.country, 
       genre.name, 
       genre.genre_id
 		FROM 
-      `alien-program-424600-g6.Music_store.invoice_line` AS invoice_line
+  		`alien-program-424600-g6.Music_store.invoice_line` AS invoice_line
 		JOIN 
-      `alien-program-424600-g6.Music_store.invoice` AS invoice 
-      ON invoice.invoice_id = invoice_line.invoice_id
+    	`alien-program-424600-g6.Music_store.invoice` AS invoice 
+    	ON invoice.invoice_id = invoice_line.invoice_id
 		JOIN 
-      `alien-program-424600-g6.Music_store.customer` AS customer 
-      ON customer.customer_id = invoice.customer_id
+    	`alien-program-424600-g6.Music_store.customer` AS customer 
+    	ON customer.customer_id = invoice.customer_id
 		JOIN 
-      `alien-program-424600-g6.Music_store.track` AS track 
-      ON track.track_id = invoice_line.track_id
+    	`alien-program-424600-g6.Music_store.track` AS track 
+    	ON track.track_id = invoice_line.track_id
 		JOIN 
-      `alien-program-424600-g6.Music_store.genre` AS genre 
-      ON genre.genre_id = track.genre_id
+    	`alien-program-424600-g6.Music_store.genre` AS genre 
+   		ON genre.genre_id = track.genre_id
 		GROUP BY 
-      2,3,4
+    	2,3,4
 		ORDER BY 
-      2
+    	2
 	),
 	max_genre_per_country AS (
     SELECT 
