@@ -231,7 +231,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/2d6f7eb4-3f2c-404d-b678-81acb1a0df6e">  
 
-   let's make this query to identify the relationships between the tables in a Music_store database more clear by adding table count
+   Let's make this query to identify the relationships between the tables in a Music_store database more clear by adding table count
    ```sql
    -- Understanding the relationships between the tables in a Music_store database
    -- Instead of ARRAY_TO_STRING(ARRAY_AGG(TABLE_NAME), ', ') AS TABLE_NAMES, we can aslo use STRING_AGG(TABLE_NAME, ', ') AS TABLE_NAMES
@@ -253,7 +253,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/ff5c5c76-c25b-4b25-93cc-c0c5e1201c3c">
    
-   Finally, we will write the query to obtain the desired answer for our question
+   Finally, we will write the query to obtain the desired answer for our question  
    ```sql
    -- Write a query to return the email, first name, last name, & Genre of all Rock Music listeners.
    -- Return your list ordered alphabetically by email starting with A
@@ -293,7 +293,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/d7dd8aab-d4d4-4a2c-b557-6462012baf66">  
 
-   By looking at the schema diagram, we understand that the artist table is connected to the album table, the album table is connected to the track table, and the track table is connected to the genre table. To join the artist table to the genre table, we need to connect all these tables. Now that we understand the relationships between the tables, let's write a query to get the desired results.
+   By looking at the schema diagram, we understand that the artist table is connected to the album table, the album table is connected to the track table, and the track table is connected to the genre table. To join the artist table to the genre table, we need to connect all these tables. Now that we understand the relationships between the tables, let's write a query to get the desired results.  
 
    ```sql
    -- Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands
@@ -349,6 +349,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 9. **Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent**  
 
    In this case, to find the desired answers, we need data from three tables: artist, customer, and invoice_line. We can't use the total column from the invoice table to calculate the total spent because we want to determine the money spent by each customer on each artist, not the total spent per invoice, which represents the total spent at a product level. For instance, if a customer bought a song from a particular artist, we will use the quantity (1) and the price of that song, multiplying them to calculate the total. However, if the customer bought an album that contains four songs, we need to multiply the unit price by the quantity (4) to get the total.
+   
    First, we will determine which artist has earned the most according to the invoice_line table. Then, using this artist, we will find which customer spent the most on this particular artist. To perform this query, we need to utilize data from the invoice, invoice_line, track, customer, album, and artist tables. Since the total spent in the invoice table might not correspond to a single product, we need to use the invoice_line table to find out how many of each product was purchased and then multiply this by the price for each artist.  
 
    ```sql
@@ -406,10 +407,12 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/1496b500-0de4-460e-a2f9-1df81af46298">  
 
-10. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**
+10. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**  
+    
     As we can observe from the schema diagram, our genre-related data is stored in the genre table, while country-related data is located in the invoice table under a column called "billing_country". However, these two tables are not directly related. Therefore, we need to write a query to connect these tables, including invoice and genre. Hence, to perform this query, we need to utilize data from the invoice, invoice_line, track, customer, and genre tables to obtain the desired answers.  
 
     Also, in this case, they asked for the highest purchases, not the total purchases. Therefore, to determine the highest purchase, we will use the count instead of multiplying the quantity by the unit price, which represents the total amount spent.
+    
     ```sql
     -- We want to find out the most popular music Genre for each country.
     -- We determine the most popular genre as the genre with the highest amount of purchases.
@@ -452,7 +455,9 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
     <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/eb476431-619c-4515-a2a5-90365dce1967">   
 
 12. **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
-    As we can see from the schema diagram, we need only two tables to solve this particular question: the customer and invoice tables. We can easily find customer information from the customer table, country information from the invoice table (in the column called "billing_country"), and total spending from the total column in the invoice table. Also, we know these two tables, customer and invoice, are directly linked to each other. Let's run a query to get the desired answer from the database.  
+    
+    As we can see from the schema diagram, we need only two tables to solve this particular question: the customer and invoice tables. We can easily find customer information from the customer table, country information from the invoice table (in the column called "billing_country"), and total spending from the total column in the invoice table. Also, we know these two tables, customer and invoice, are directly linked to each other. Let's run a query to get the desired answer from the database.
+    
     ```sql
     -- Write a query that determines the customer that has spent the most on music for each country.
     -- Write a query that returns the country along with the top customer and how much they spent.
