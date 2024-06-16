@@ -287,7 +287,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```  
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/803a7613-c90e-4a2d-b157-3d9fafc66a31">  
    
-8. **Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands**  
+7. **Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the top 10 rock bands**  
 
    In this case, we want to join our artist table to the genre table, but there are no direct relationships between these two tables. So, we will look at our schema diagram to understand the relationships of the tables and write the query to get the answers we want.
 
@@ -314,7 +314,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
      `alien-program-424600-g6.Music_store.genre` AS genre
      ON genre.genre_id = track.genre_id
    WHERE
-     genre.name LIKE 'Rock'    -- Instead of genre.name LIKE 'Rock', you can also use genre.name = 'Rock'
+     genre.name LIKE 'Rock'    
    GROUP BY
      artist.artist_id,
      artist.name
@@ -324,7 +324,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/feb4fddb-0fe3-497c-8640-5d4b415f17a4">
 
-9. **Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first**  
+8. **Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first**  
 
    ```sql
    -- Return all the track names that have a song length longer than the average song length.
@@ -346,9 +346,9 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/d5fe2840-8fe8-4c49-9395-5c585d3d32a0">
    
-10. **Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent**  
+9. **Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent**  
 
-   In this case, to find the desired answers, we need data from three tables: artist, customer, and invoice_line. We can't use the total column from the invoice table to calculate the total spent because we want to determine the money spent by each customer on each artist, not the total spent per invoice, which represents the total spent at a product level. For instance, if a customer bought a song from a particular artist, we will use the quantity (1) and the price of that song, multiplying them to calculate the total. However, if the customer bought an album that contains four songs, we need to multiply the unit price by the quantity (4) to get the total.  
+   In this case, to find the desired answers, we need data from three tables: artist, customer, and invoice_line. We can't use the total column from the invoice table to calculate the total spent because we want to determine the money spent by each customer on each artist, not the total spent per invoice, which represents the total spent at a product level. For instance, if a customer bought a song from a particular artist, we will use the quantity (1) and the price of that song, multiplying them to calculate the total. However, if the customer bought an album that contains four songs, we need to multiply the unit price by the quantity (4) to get the total.
    First, we will determine which artist has earned the most according to the invoice_line table. Then, using this artist, we will find which customer spent the most on this particular artist. To perform this query, we need to utilize data from the invoice, invoice_line, track, customer, album, and artist tables. Since the total spent in the invoice table might not correspond to a single product, we need to use the invoice_line table to find out how many of each product was purchased and then multiply this by the price for each artist.  
 
    ```sql
@@ -406,9 +406,9 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
    ```
    <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/1496b500-0de4-460e-a2f9-1df81af46298">  
 
-11. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**  
-
+10. **We want to find out the most popular music Genre for each country. We determine the most popular genre as the genre with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where the maximum number of purchases is shared return all Genres**
     As we can observe from the schema diagram, our genre-related data is stored in the genre table, while country-related data is located in the invoice table under a column called "billing_country". However, these two tables are not directly related. Therefore, we need to write a query to connect these tables, including invoice and genre. Hence, to perform this query, we need to utilize data from the invoice, invoice_line, track, customer, and genre tables to obtain the desired answers.  
+
     Also, in this case, they asked for the highest purchases, not the total purchases. Therefore, to determine the highest purchase, we will use the count instead of multiplying the quantity by the unit price, which represents the total amount spent.
     ```sql
     -- We want to find out the most popular music Genre for each country.
