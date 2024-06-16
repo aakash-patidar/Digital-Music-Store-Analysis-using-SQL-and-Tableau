@@ -158,7 +158,7 @@ WHERE
       `alien-program-424600-g6.Music_store.genre` AS genre
       ON track.genre_id = genre.genre_id
     WHERE
-      genre.name LIKE 'Rock'    -- Instead of genre.name LIKE 'Rock', you can also use genre.name = 'Rock'
+      genre.name = 'Rock'    -- Instead of genre.name = 'Rock', we can also use genre.name LIKE 'Rock'
   )
 ORDER BY
   email;
