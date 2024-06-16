@@ -109,25 +109,18 @@ HAVING
 -- Understanding the relationships between the tables in a Music_store database
 -- Instead of ARRAY_TO_STRING(ARRAY_AGG(TABLE_NAME), ', ') AS TABLE_NAMES, we can aslo use STRING_AGG(TABLE_NAME, ', ') AS TABLE_NAMES
 
-WITH column_table AS (
-  SELECT
-    COLUMN_NAME,
-    TABLE_NAME
-  FROM
-    `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
-  WHERE
-    TABLE_NAME IN ('album', 'artist', 'customer', 'employee', 'genre', 'invoice', 'invoice_line', 'media_type', 'playlist', 'playlist_track', 'track')
-)
 SELECT
   COLUMN_NAME,
-  ARRAY_TO_STRING(ARRAY_AGG(TABLE_NAME), ', ') AS TABLE_NAMES,
+  STRING_AGG(TABLE_NAME, ', ') AS TABLE_NAMES,
   COUNT(DISTINCT TABLE_NAME) AS TABLE_COUNT
 FROM
-  column_table
+  `alien-program-424600-g6.Music_store.INFORMATION_SCHEMA.COLUMNS`
+WHERE
+  TABLE_NAME IN ('album', 'artist', 'customer', 'employee', 'genre', 'invoice', 'invoice_line', 'media_type', 'playlist', 'playlist_track', 'track')
 GROUP BY
   COLUMN_NAME
 HAVING
-  TABLE_COUNT >= 2
+  COUNT(DISTINCT TABLE_NAME) >= 2
 ORDER BY
   TABLE_COUNT DESC;
 
