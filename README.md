@@ -464,21 +464,21 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
     -- For countries where the top amount spent is shared, provide all customers who spent this amount
 
     WITH Customter_with_country AS (
-      SELECT 
+      SELECT
         customer.customer_id,
         customer.first_name,
         customer.last_name,
         invoice.billing_country,
         SUM(total) AS total_spending,
-        ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS RowNo 
-		  FROM 
+        ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS RowNo
+      FROM 
         `alien-program-424600-g6.Music_store.invoice` AS invoice
       JOIN 
         `alien-program-424600-g6.Music_store.customer` AS customer 
         ON customer.customer_id = invoice.customer_id
-		  GROUP BY 
+      GROUP BY 
         1,2,3,4
-		  ORDER BY 
+      ORDER BY
         4 ASC,
         5 DESC
     )
