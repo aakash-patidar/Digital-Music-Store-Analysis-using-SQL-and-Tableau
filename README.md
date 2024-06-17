@@ -420,7 +420,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
 
     WITH popular_genre AS (
       SELECT
-        COUNT(invoice_line.quantity) AS purchases,   -- we can take count of any column in the invoice_line table
+        COUNT(invoice_line.quantity) AS purchases,   
         customer.country,
         genre.name,
         genre.genre_id,
@@ -454,7 +454,7 @@ The "Analyze" phase in the data analysis process involves examining the cleaned 
     ```
     <img src="https://github.com/aakash-patidar/Digital-Music-Store-Analysis-using-SQL-and-Tableau/assets/171103471/eb476431-619c-4515-a2a5-90365dce1967">   
 
-12. **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
+11. **Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount**  
     
     As we can see from the schema diagram, we need only two tables to solve this particular question: the customer and invoice tables. We can easily find customer information from the customer table, country information from the invoice table (in the column called "billing_country"), and total spending from the total column in the invoice table. Also, we know these two tables, customer and invoice, are directly linked to each other. Let's run a query to get the desired answer from the database.
     
